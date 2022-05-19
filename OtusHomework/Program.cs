@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Diagnostics;
+using System.Text;
 
 namespace СollectionСomparison
 {
@@ -78,7 +79,7 @@ namespace СollectionСomparison
 
 
             var cursorPosition = Console.GetCursorPosition();
-            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top + 10);
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top + 50);
 
 
             sw.Restart();
@@ -124,6 +125,182 @@ namespace СollectionСomparison
 
             Console.WriteLine($"### Время вывода элементов, кратных {divisor} ###");
             PrintTimes(elapsedTimes);
+
+
+            cursorPosition = Console.GetCursorPosition();
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top + 50);
+
+            var result = string.Empty;
+            sw.Restart();
+
+            foreach (var item in list)
+            {
+                if (item % divisor == 0)
+                {
+                    result += $"{item} ";
+                }
+            }
+
+            Console.WriteLine(result);
+
+            sw.Stop();
+            elapsedTimes["List"] = sw.Elapsed;
+
+            result = string.Empty;
+            sw.Restart();
+
+            foreach (var item in arrayList)
+            {
+                if (Convert.ToInt32(item) % divisor == 0)
+                {
+                    result += $"{item} ";
+                }
+            }
+
+            Console.WriteLine(result);
+
+            sw.Stop();
+            elapsedTimes["ArrayList"] = sw.Elapsed;
+
+            result = string.Empty;
+            sw.Restart();
+
+            foreach (var item in linkedList)
+            {
+                if (item % divisor == 0)
+                {
+                    result += $"{item} ";
+                }
+            }
+
+            Console.WriteLine(result);
+
+            sw.Stop();
+            elapsedTimes["LinkedList"] = sw.Elapsed;
+
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+
+            Console.WriteLine($"### Время вывода элементов, кратных {divisor}\n" +
+                $"Сначала в строку, потом на консоль ###");
+            PrintTimes(elapsedTimes);
+
+
+            cursorPosition = Console.GetCursorPosition();
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top + 50);
+
+            var sb = new StringBuilder();
+            sw.Restart();
+
+            foreach (var item in list)
+            {
+                if (item % divisor == 0)
+                {
+                    sb.Append($"{item} ");
+                }
+            }
+
+            Console.WriteLine(sb.ToString());
+
+            sw.Stop();
+            elapsedTimes["List"] = sw.Elapsed;
+
+            sb.Clear();
+            sw.Restart();
+
+            foreach (var item in arrayList)
+            {
+                if (Convert.ToInt32(item) % divisor == 0)
+                {
+                    sb.Append($"{item} ");
+                }
+            }
+
+            Console.WriteLine(sb.ToString());
+
+            sw.Stop();
+            elapsedTimes["ArrayList"] = sw.Elapsed;
+
+            sb.Clear();
+            sw.Restart();
+
+            foreach (var item in linkedList)
+            {
+                if (item % divisor == 0)
+                {
+                    sb.Append($"{item} ");
+                }
+            }
+
+            Console.WriteLine(sb.ToString());
+
+            sw.Stop();
+            elapsedTimes["LinkedList"] = sw.Elapsed;
+
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+
+            Console.WriteLine($"### Время вывода элементов, кратных {divisor}\n" +
+                $"Сначала в StringBuilder, потом на консоль ###");
+            PrintTimes(elapsedTimes);
+
+            cursorPosition = Console.GetCursorPosition();
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top + 50);
+
+            sb.Clear();
+            sw.Restart();
+
+            for (int i = 0; i < collectionLength; i++)
+            {
+                if (list[i] % divisor == 0)
+                {
+                    sb.Append($"{list[i]} ");
+                }
+            }
+
+            Console.WriteLine(sb.ToString());
+
+            sw.Stop();
+            elapsedTimes["List"] = sw.Elapsed;
+
+            sb.Clear();
+            sw.Restart();
+
+            for (int i = 0; i < collectionLength; i++)
+            {
+                if (Convert.ToInt32(arrayList[i]) % divisor == 0)
+                {
+                    sb.Append($"{arrayList[i]} ");
+                }
+            }
+
+            Console.WriteLine(sb.ToString());
+
+            sw.Stop();
+            elapsedTimes["ArrayList"] = sw.Elapsed;
+
+            sb.Clear();
+            sw.Restart();
+
+            foreach (var item in linkedList)
+            {
+                if (item % divisor == 0)
+                {
+                    sb.Append($"{item} ");
+                }
+            }
+
+            Console.WriteLine(sb.ToString());
+
+            sw.Stop();
+            elapsedTimes["LinkedList"] = sw.Elapsed;
+
+            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+
+            Console.WriteLine($"### Время вывода элементов, кратных {divisor}\n" +
+                $"Сначала в StringBuilder, потом на консоль ###");
+            PrintTimes(elapsedTimes);
+
+
+            Console.ReadKey();
         }
 
         private static int GetElementValueByIndex(LinkedList<int> list, int index)
