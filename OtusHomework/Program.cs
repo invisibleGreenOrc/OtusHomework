@@ -53,19 +53,43 @@ namespace СollectionСomparison
             s.InsertRange(0, emptyStringList);
             s.AddRange(emptyStringList);
 
-            
+            var firstStringHeight = s.Count;
 
             PrintHorizontalBorder(tableWidth, tableBorderSign);
 
             foreach (var item in s)
             {
-                Console.Write(tableBorderSign);
-                Console.Write(item);
-                Console.WriteLine(tableBorderSign);
+                Console.WriteLine(tableBorderSign + item + tableBorderSign);
             }
 
             PrintHorizontalBorder(tableWidth, tableBorderSign);
 
+
+            for (int i = 0; i < firstStringHeight; i++)
+            {
+                var str = "";
+
+                for (int j = 0; j < tableWidth - 2; j++)
+                {
+                    if (j % 2 == 0)
+                    {
+                        str += ' ';
+                    }
+                    else
+                    {
+                        str += tableBorderSign;
+                    }
+                }
+
+                if (i % 2 == 0)
+                {
+                    str = str.Substring(1) + tableBorderSign;
+                }
+
+                Console.WriteLine(tableBorderSign + str + tableBorderSign);
+            }
+
+            PrintHorizontalBorder(tableWidth, tableBorderSign);
 
             Console.ReadLine();
         }
