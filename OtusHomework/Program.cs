@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text;
+
 namespace СollectionСomparison
 {
     internal class Program
@@ -83,29 +85,36 @@ namespace СollectionСomparison
         private static List<string> CreateChessRow(char sign, int height, int tableWidth)
         {
             var row = new List<string>();
-            
-            for (int i = 0; i < height; i++)
+
+            var sourceString = new StringBuilder();
+            var sourceStringLength = tableWidth - 1;
+
+            for (int i = 0; i < sourceStringLength; i++)
             {
-                var str = "";
-
-                for (int j = 0; j < tableWidth - 2; j++)
-                {
-                    if (j % 2 == 0)
-                    {
-                        str += ' ';
-                    }
-                    else
-                    {
-                        str += sign;
-                    }
-                }
-
                 if (i % 2 == 0)
                 {
-                    str = str[1..] + sign;
+                    sourceString.Append(' ');
                 }
+                else
+                {
+                    sourceString.Append(sign);
+                }
+            }
 
-                row.Add(str);
+            var oddString = sourceString.ToString(0, sourceStringLength - 1);
+            var evenString = sourceString.ToString(1, sourceStringLength - 1);
+
+
+            for (int i = 0; i < height; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    row.Add(evenString);
+                }
+                else
+                {
+                    row.Add(oddString);
+                }
             }
 
             return row;
@@ -144,7 +153,7 @@ namespace СollectionСomparison
 
         private static bool IsNumberOutOfRange(int number, int min, int max)
         {
-            return number < min && number > max;
+            return number < min || number > max;
         }
 
         private static int CalculateTableWidth(int tableDimension, int maxTableWidth, string userText)
