@@ -31,6 +31,7 @@ namespace СollectionСomparison
             var firstRow = CreateRowWithPadding(userTest, tableDimension - 1, tableWidth);
             var firstStringHeight = firstRow.Count;
             var secondRow = CreateChessRow(tableBorderSign, firstStringHeight, tableWidth);
+            var thirdRow = CreateCrossRow(tableBorderSign, tableWidth);
 
             PrintHorizontalBorder(tableWidth, tableBorderSign);
 
@@ -41,24 +42,28 @@ namespace СollectionСomparison
             PrintStringsWithLeftRightBorder(secondRow, tableBorderSign);
 
             PrintHorizontalBorder(tableWidth, tableBorderSign);
+
+            PrintStringsWithLeftRightBorder(thirdRow, tableBorderSign);
+
+            PrintHorizontalBorder(tableWidth, tableBorderSign);
         }
 
 
         private static List<string> CreateRowWithPadding(string str, int paddingValue, int tableWidth)
         {
             List<char[]> ss = str.Chunk(tableWidth - 2 * (paddingValue + 1)).ToList();
-            List<string> s = new List<string>();
+            List<string> row = new List<string>();
 
             foreach (var item in ss)
             {
-                s.Add(new string(item));
+                row.Add(new string(item));
             }
 
             string whitespaces = new string(' ', paddingValue);
 
-            for (int i = 0; i < s.Count; i++)
+            for (int i = 0; i < row.Count; i++)
             {
-                s[i] = $"{whitespaces}{s[i]}".PadRight(tableWidth - 2, ' ');
+                row[i] = $"{whitespaces}{row[i]}".PadRight(tableWidth - 2, ' ');
             }
 
             var emptyString = new string(' ', tableWidth - 2);
@@ -69,15 +74,15 @@ namespace СollectionСomparison
                 emptyStringList.Add(emptyString);
             }
 
-            s.InsertRange(0, emptyStringList);
-            s.AddRange(emptyStringList);
+            row.InsertRange(0, emptyStringList);
+            row.AddRange(emptyStringList);
 
-            return s;
+            return row;
         }
 
         private static List<string> CreateChessRow(char sign, int height, int tableWidth)
         {
-            var s = new List<string>();
+            var row = new List<string>();
             
             for (int i = 0; i < height; i++)
             {
@@ -97,16 +102,46 @@ namespace СollectionСomparison
 
                 if (i % 2 == 0)
                 {
-                    str = str.Substring(1) + sign;
+                    str = str[1..] + sign;
                 }
 
-                s.Add(str);
+                row.Add(str);
             }
 
-            return s;
+            return row;
         }
 
-        
+        private static List<string> CreateCrossRow(char sign, int tableWidth)
+        {
+            var contentField = new char[tableWidth - 2][];
+
+            for (int i = 0; i < contentField.Length; i++)
+            {
+                contentField[i] = new char[tableWidth - 2];
+
+                for (int j = 0; j < contentField[i].Length; j++)
+                {
+                    if (( i == j ) || ( i + j == contentField.Length - 1))
+                    {
+                        contentField[i][j] = sign;
+                    }
+                    else
+                    {
+                        contentField[i][j] = ' ';
+                    }
+                }
+            }
+
+            var row = new List<string>();
+
+            for (int i = 0; i < contentField.Length; i++)
+            {
+                row.Add(new string(contentField[i]));
+            }
+
+            return row;
+        }
+
         private static bool IsNumberOutOfRange(int number, int min, int max)
         {
             return number < min && number > max;
