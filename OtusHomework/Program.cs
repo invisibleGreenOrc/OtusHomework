@@ -1,6 +1,4 @@
-﻿
-
-using System.Text;
+﻿using System.Text;
 
 namespace СollectionСomparison
 {
@@ -59,7 +57,6 @@ namespace СollectionСomparison
             }
         }
 
-
         private static List<string> CreateRowWithPadding(string str, int paddingValue, int tableWidth)
         {
             List<char[]> ss = str.Chunk(tableWidth - 2 * (paddingValue + 1)).ToList();
@@ -113,7 +110,6 @@ namespace СollectionСomparison
             var oddString = sourceString.ToString(0, sourceStringLength - 1);
             var evenString = sourceString.ToString(1, sourceStringLength - 1);
 
-
             for (int i = 0; i < height; i++)
             {
                 if (i % 2 == 0)
@@ -139,7 +135,7 @@ namespace СollectionСomparison
 
                 for (int j = 0; j < contentField[i].Length; j++)
                 {
-                    if (( i == j ) || ( i + j == contentField.Length - 1))
+                    if ((i == j) || (i + j == contentField.Length - 1))
                     {
                         contentField[i][j] = sign;
                     }
