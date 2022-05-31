@@ -1,6 +1,4 @@
-﻿
-
-using System.Text;
+﻿using System.Text;
 
 namespace СollectionСomparison
 {
@@ -139,7 +137,7 @@ namespace СollectionСomparison
 
                 for (int j = 0; j < contentField[i].Length; j++)
                 {
-                    if (( i == j ) || ( i + j == contentField.Length - 1))
+                    if ((i == j) || (i + j == contentField.Length - 1))
                     {
                         contentField[i][j] = sign;
                     }
