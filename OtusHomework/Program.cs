@@ -34,20 +34,29 @@ namespace СollectionСomparison
             var firstStringHeight = firstRow.Count;
             var secondRow = CreateChessRow(tableBorderSign, firstStringHeight, tableWidth);
             var thirdRow = CreateCrossRow(tableBorderSign, tableWidth);
+            var horizontalBorder = CreateHorizontalBorder(tableWidth, tableBorderSign);
 
-            PrintHorizontalBorder(tableWidth, tableBorderSign);
+            Console.WriteLine(horizontalBorder);
 
-            PrintStringsWithLeftRightBorder(firstRow, tableBorderSign);
+            for (int rowNumber = 1; rowNumber < 4; rowNumber++)
+            {
+                switch (rowNumber)
+                {
+                    case 1:
+                        PrintStringsWithLeftRightBorder(firstRow, tableBorderSign);
+                        break;
+                    case 2:
+                        PrintStringsWithLeftRightBorder(secondRow, tableBorderSign);
+                        break;
+                    case 3:
+                        PrintStringsWithLeftRightBorder(thirdRow, tableBorderSign);
+                        break;
+                    default:
+                        break;
+                }
 
-            PrintHorizontalBorder(tableWidth, tableBorderSign);
-
-            PrintStringsWithLeftRightBorder(secondRow, tableBorderSign);
-
-            PrintHorizontalBorder(tableWidth, tableBorderSign);
-
-            PrintStringsWithLeftRightBorder(thirdRow, tableBorderSign);
-
-            PrintHorizontalBorder(tableWidth, tableBorderSign);
+                Console.WriteLine(horizontalBorder);
+            }
         }
 
 
@@ -163,10 +172,10 @@ namespace СollectionСomparison
             return proposedWidth > maxTableWidth ? maxTableWidth : proposedWidth;
         }
 
-        private static void PrintHorizontalBorder(int length, char sign)
+        private static string CreateHorizontalBorder(int length, char sign)
         {
             var border = new string(sign, length);
-            Console.WriteLine(border);
+            return border;
         }
 
         private static void PrintStringsWithLeftRightBorder(List<string> strings, char tableBorderSign)
