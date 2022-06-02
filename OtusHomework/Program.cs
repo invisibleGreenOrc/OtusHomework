@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace СollectionСomparison
+namespace ConsoleTable
 {
     internal class Program
     {
