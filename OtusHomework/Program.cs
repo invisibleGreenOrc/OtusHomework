@@ -86,7 +86,7 @@ namespace ExceptionHandling
                 }
                 catch (OperandNotIntegerException e)
                 {
-                    var message = $"Операнд {e.Message} не является числом";
+                    var message = $"Операнд {e.Data["IncorrectOperand"]} не является числом";
 
                     PrintWithColoredBackground(message, ConsoleColor.DarkRed);
                 }
@@ -159,7 +159,9 @@ namespace ExceptionHandling
             }
             catch (FormatException)
             {
-                throw new OperandNotIntegerException(input);
+                var e = new OperandNotIntegerException();
+                e.Data.Add("IncorrectOperand", input);
+                throw e;
             }
         }
 
