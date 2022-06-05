@@ -6,7 +6,16 @@ namespace ExceptionHandling
     {
         static void Main()
         {
-            Calculate();
+            try
+            {
+                Calculate();
+            }
+            catch (Exception e)
+            {
+                var message = $"В калькуляторе произошла ошибка: {e.Message}";
+
+                Console.WriteLine(message);
+            }
         }
 
         private static void Calculate()
@@ -104,10 +113,12 @@ namespace ExceptionHandling
                 }
                 catch (Exception)
                 {
-                    var message = "Я не смог обработать ошибку";
+                    //var message = "Я не смог обработать ошибку";
 
-                    Console.WriteLine(message);
-                    break;
+                    //Console.WriteLine(message);
+                    //break;
+
+                    throw;
                 }
             }
         }
