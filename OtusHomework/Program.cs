@@ -16,7 +16,8 @@ namespace ConsoleTable
             do
             {
                 Console.WriteLine("Введите размерность таблицы - целое число от 1 до 6:");
-            } while (!int.TryParse(Console.ReadLine(), out tableDimension) || IsNumberOutOfRange(tableDimension, minDimension, maxDimension));
+            }
+            while (!int.TryParse(Console.ReadLine(), out tableDimension) || IsNumberOutOfRange(tableDimension, minDimension, maxDimension));
 
             string userTest;
 
@@ -24,7 +25,8 @@ namespace ConsoleTable
             {
                 Console.WriteLine("Введите произвольный текст:");
                 userTest = Console.ReadLine();
-            } while (userTest.Length == 0);
+            }
+            while (userTest.Length == 0);
 
             var tableWidth = CalculateTableWidth(tableDimension, maxTableWidth, userTest);
 
@@ -49,8 +51,6 @@ namespace ConsoleTable
                     case 3:
                         PrintStringsWithLeftRightBorder(thirdRow, tableBorderSign);
                         break;
-                    default:
-                        break;
                 }
 
                 Console.WriteLine(horizontalBorder);
@@ -68,6 +68,7 @@ namespace ConsoleTable
             }
 
             string whitespaces = new string(' ', paddingValue);
+
 
             for (int i = 0; i < row.Count; i++)
             {
@@ -97,14 +98,7 @@ namespace ConsoleTable
 
             for (int i = 0; i < sourceStringLength; i++)
             {
-                if (i % 2 == 0)
-                {
-                    sourceString.Append(' ');
-                }
-                else
-                {
-                    sourceString.Append(sign);
-                }
+                sourceString.Append(i % 2 == 0 ? ' ' : sign);
             }
 
             var oddString = sourceString.ToString(0, sourceStringLength - 1);
@@ -112,14 +106,7 @@ namespace ConsoleTable
 
             for (int i = 0; i < height; i++)
             {
-                if (i % 2 == 0)
-                {
-                    row.Add(evenString);
-                }
-                else
-                {
-                    row.Add(oddString);
-                }
+                row.Add(i % 2 == 0 ? evenString : oddString);
             }
 
             return row;
@@ -176,10 +163,17 @@ namespace ConsoleTable
 
         private static void PrintStringsWithLeftRightBorder(List<string> strings, char tableBorderSign)
         {
+            var sb = new StringBuilder();
+
             foreach (var strg in strings)
             {
-                Console.WriteLine(tableBorderSign + strg + tableBorderSign);
+                sb.Append(tableBorderSign);
+                sb.Append(strg);
+                sb.Append(tableBorderSign);
+                sb.Append('\n');
             }
+
+            Console.Write(sb.ToString());
         }
     }
 }
