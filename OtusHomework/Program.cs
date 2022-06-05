@@ -111,6 +111,12 @@ namespace ExceptionHandling
 
                     PrintWithColoredBackground(message, ConsoleColor.DarkGreen);
                 }
+                catch (OverflowException)
+                {
+                    var message = "Результат выражения вышел за границы int";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkBlue);
+                }
                 catch (Exception)
                 {
                     //var message = "Я не смог обработать ошибку";
