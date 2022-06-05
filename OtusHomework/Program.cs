@@ -21,7 +21,7 @@ namespace ExceptionHandling
             {
                 try
                 {
-                    userInput = Console.ReadLine();
+                    userInput = Console.ReadLine().TrimEnd();
 
                     if (string.Equals(userInput, StopWord))
                     {
@@ -30,9 +30,9 @@ namespace ExceptionHandling
 
                     var parts = userInput.Split(Separator);
 
-                    if (parts.Length != 3 || allowedOperators.Contains(parts[0][0]) || allowedOperators.Contains(parts[2][0]))
+                    if (!IsExpressionInCorrectFormat(parts, allowedOperators))
                     {
-                        throw new FormatException();
+                        throw new UnexpectedExpressionFormatException();
                     }
 
                     var firstOperand = ParseToInt(parts[0]);
@@ -64,52 +64,91 @@ namespace ExceptionHandling
                 }
                 catch (MissedOperatorException)
                 {
-                    Console.WriteLine("Укажите в выражении оператор: +, -, *, /");
+                    var message = "Укажите в выражении оператор: +, -, *, /";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkRed);
                 }
                 catch (UnsupportedOperatorException e)
                 {
-                    Console.WriteLine($"Я пока не умею работать с оператором {e.Message}");
+                    var message = $"Я пока не умею работать с оператором {e.Message}";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkGreen);
                 }
-                catch (FormatException)
+                catch (UnexpectedExpressionFormatException)
                 {
-                    Console.WriteLine("Выражение некорректное, попробуйте написать в формате\n" +
+                    var message = "Выражение некорректное, попробуйте написать в формате\n" +
                                         $"a + b\n" +
                                         $"a * b\n" +
                                         $"a - b\n" +
-                                        $"a / b");
+                                        $"a / b";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkRed);
                 }
-                catch (OperandNotIntNumberException e)
+                catch (OperandNotIntegerException e)
                 {
-                    Console.WriteLine($"Операнд {e.Message} не является числом");
+                    var message = $"Операнд {e.Message} не является числом";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkRed);
+                }
+                catch (DivideByZeroException)
+                {
+                    var message = "Деление на ноль";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkMagenta);
+                }
+                catch (SpecialResultException e)
+                {
+                    var message = $"Вы получили ответ {e.Data["SpecialResult"]}!";
+
+                    PrintWithColoredBackground(message, ConsoleColor.DarkGreen);
                 }
                 catch (Exception)
                 {
+                    var message = "Я не смог обработать ошибку";
 
-                    throw;
+                    Console.WriteLine(message);
+                    break;
                 }
-
-
             }
         }
 
         private static void Sum(int a, int b)
         {
-            Console.WriteLine($"Ответ: {a + b}");
+            var result = a + b;
+            Console.WriteLine($"Ответ: {result}");
+
+            ThrowExceptionForSpeciaResult(13, result);
         }
 
         private static void Sub(int a, int b)
         {
-            Console.WriteLine($"Ответ: {a - b}");
+            var result = a - b;
+            Console.WriteLine($"Ответ: {result}");
+
+            ThrowExceptionForSpeciaResult(13, result);
         }
 
         private static void Mul(int a, int b)
         {
-            Console.WriteLine($"Ответ: {a * b}");
+            var result = a * b;
+            Console.WriteLine($"Ответ: {result}");
+
+            ThrowExceptionForSpeciaResult(13, result);
         }
 
         private static void Div(int a, int b)
         {
-            Console.WriteLine($"Ответ: {a / b}");
+            if (b != 0)
+            {
+                var result = a / b;
+                Console.WriteLine($"Ответ: {result}");
+
+                ThrowExceptionForSpeciaResult(13, result);
+            }
+            else
+            {
+                throw new DivideByZeroException();
+            }
         }
 
         private static int ParseToInt(string input)
@@ -120,8 +159,39 @@ namespace ExceptionHandling
             }
             catch (FormatException)
             {
-                throw new OperandNotIntNumberException(input);
+                throw new OperandNotIntegerException(input);
             }
+        }
+
+        private static void PrintWithColoredBackground(string text, ConsoleColor color)
+        {
+            Console.BackgroundColor = color;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        private static void ThrowExceptionForSpeciaResult(int expectedResult, int result)
+        {
+            if (expectedResult == result)
+            {
+                var e = new SpecialResultException();
+                e.Data.Add("SpecialResult", expectedResult);
+                throw e;
+            }
+        }
+
+        private static bool IsExpressionInCorrectFormat(string[] expressionParts, char[] allowedOperators)
+        {
+            var isLengthCorrect = expressionParts.Length == 3;
+
+            var hasCorrectOperator = false;
+
+            if (isLengthCorrect)
+            {
+                hasCorrectOperator = !allowedOperators.Contains(expressionParts[0][0]) && !allowedOperators.Contains(expressionParts[2][0]);
+            }
+
+            return isLengthCorrect && hasCorrectOperator;
         }
     }
 }

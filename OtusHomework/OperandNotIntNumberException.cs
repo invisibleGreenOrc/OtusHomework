@@ -3,21 +3,21 @@
 namespace ExceptionHandling
 {
     [Serializable]
-    internal class OperandNotIntNumberException : Exception
+    internal class OperandNotIntegerException : Exception
     {
-        public OperandNotIntNumberException()
+        public OperandNotIntegerException()
         {
         }
 
-        public OperandNotIntNumberException(string? message) : base(message)
+        public OperandNotIntegerException(string? message) : base(message)
         {
         }
 
-        public OperandNotIntNumberException(string? message, Exception? innerException) : base(message, innerException)
+        public OperandNotIntegerException(string? message, Exception? innerException) : base(message, innerException)
         {
         }
 
-        protected OperandNotIntNumberException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected OperandNotIntegerException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
