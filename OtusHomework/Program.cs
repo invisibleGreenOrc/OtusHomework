@@ -20,9 +20,9 @@ namespace ExceptionHandling
 
         private static void Calculate()
         {
-            const string StopWord = "стоп";
-            var allowedOperators = new char[] { '+', '-', '*', '/' };
-            const char Separator = ' ';
+            var stopWord = "стоп";
+            var allowedOperators = new[] { '+', '-', '*', '/' };
+            var separator = ' ';
 
             string userInput;
 
@@ -32,12 +32,12 @@ namespace ExceptionHandling
                 {
                     userInput = Console.ReadLine().TrimEnd();
 
-                    if (string.Equals(userInput, StopWord))
+                    if (string.Equals(userInput, stopWord))
                     {
                         break;
                     }
 
-                    var parts = userInput.Split(Separator);
+                    var parts = userInput.Split(separator);
 
                     if (!IsExpressionInCorrectFormat(parts, allowedOperators))
                     {
@@ -117,15 +117,6 @@ namespace ExceptionHandling
 
                     PrintWithColoredBackground(message, ConsoleColor.DarkBlue);
                 }
-                catch (Exception)
-                {
-                    //var message = "Я не смог обработать ошибку";
-
-                    //Console.WriteLine(message);
-                    //break;
-
-                    throw;
-                }
             }
         }
 
@@ -155,17 +146,10 @@ namespace ExceptionHandling
 
         private static void Div(int a, int b)
         {
-            if (b != 0)
-            {
-                var result = a / b;
-                Console.WriteLine($"Ответ: {result}");
+            var result = a / b;
+            Console.WriteLine($"Ответ: {result}");
 
-                ThrowExceptionForSpeciaResult(13, result);
-            }
-            else
-            {
-                throw new DivideByZeroException();
-            }
+            ThrowExceptionForSpeciaResult(13, result);
         }
 
         private static int ParseToInt(string input)
