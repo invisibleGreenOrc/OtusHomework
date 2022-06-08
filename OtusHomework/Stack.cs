@@ -27,6 +27,18 @@
             }
         }
 
+        public static Stack Concat(params Stack[] stacks)
+        {
+            var finalStack = new Stack();
+
+            foreach (var stack in stacks)
+            {
+                finalStack.Merge(stack);
+            }
+
+            return finalStack;
+        }
+
         public void Add(string element)
         {
             _elements.Add(element);

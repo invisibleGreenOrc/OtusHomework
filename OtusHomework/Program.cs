@@ -21,6 +21,10 @@
 
             var se = new Stack("a", "b", "c");
             se.Merge(new Stack("1", "2", "3"));
+            // в стеке s теперь элементы - "a", "b", "c", "3", "2", "1" <- верхний
+
+            var sc = Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stack("А", "Б", "В"));
+            // в стеке s теперь элементы - "c", "b", "a" "3", "2", "1", "В", "Б", "А" <- верхний
 
             Console.ReadKey();
 
