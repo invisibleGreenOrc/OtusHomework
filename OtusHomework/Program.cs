@@ -19,6 +19,9 @@
             // size = 0, Top = null
             Console.WriteLine($"size = {s.Size}, Top = {(s.Top == null ? "null" : s.Top)}");
 
+            var se = new Stack("a", "b", "c");
+            se.Merge(new Stack("1", "2", "3"));
+
             Console.ReadKey();
 
             s.Pop();

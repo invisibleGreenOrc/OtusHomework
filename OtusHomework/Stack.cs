@@ -23,7 +23,7 @@
         {
             for (int i = 0; i < elements.Length; i++)
             {
-                _elements.Add(elements[i]);
+                Add(elements[i]);
             }
         }
 
@@ -34,7 +34,7 @@
 
         public string Pop()
         {
-            if (_elements.Count == 0)
+            if (Size == 0)
             {
                 throw new InvalidOperationException("Стек пустой");
             }
