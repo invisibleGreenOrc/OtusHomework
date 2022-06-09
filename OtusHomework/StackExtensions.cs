@@ -4,7 +4,7 @@
     {
         public static Stack Merge(this Stack stack, Stack stackToAdd)
         {
-            while (stackToAdd.Size != 0)
+            while (stackToAdd.Top is not null)
             {
                 stack.Add(stackToAdd.Pop());
             }
