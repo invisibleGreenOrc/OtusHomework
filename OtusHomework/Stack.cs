@@ -2,22 +2,39 @@
 {
     public class Stack
     {
-        public int Size => _elements.Count();
-
-        public string Top
+        private class StackItem
         {
-            get
-            {
-                if (Size == 0)
-                {
-                    return null;
-                }
+            public string Value { get; private set; }
 
-                return _elements[_elements.Count - 1];
+            public StackItem? Previous { get; private set; }
+
+            public StackItem(string value, StackItem? previous)
+            {
+                Value = value;
+                Previous = previous;
             }
         }
 
-        private List<string> _elements = new List<string>();
+        public int Size 
+        {
+            get
+            {
+                var count = 0;
+                var element = _lastElement;
+
+                while (element is not null)
+                {
+                    count++;
+                    element = element.Previous;
+                }
+
+                return count;
+            } 
+        }
+
+        public string? Top => _lastElement?.Value;
+
+        private StackItem? _lastElement;
 
         public Stack(params string[] elements)
         {
@@ -39,22 +56,23 @@
             return finalStack;
         }
 
-        public void Add(string element)
+        public void Add(string elementValue)
         {
-            _elements.Add(element);
+            var newElement = new StackItem(elementValue, _lastElement);
+            _lastElement = newElement;
         }
 
         public string Pop()
         {
-            if (Size == 0)
+            if (_lastElement is null)
             {
                 throw new InvalidOperationException("Стек пустой");
             }
 
-            var lastElement = Top;
-            _elements.RemoveAt(_elements.Count - 1);
+            var lastElementValue = _lastElement.Value;
+            _lastElement = _lastElement.Previous;
 
-            return lastElement;
+            return lastElementValue;
         }
     }
 }
