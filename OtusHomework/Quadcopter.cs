@@ -17,7 +17,14 @@
 
         public string GetInfo()
         {
-            throw new NotImplementedException();
+            var info = $"I am a quadcopter with { _components.Count } components.";
+
+            return info;
+        }
+
+        public string GetRobotType()
+        {
+            return "I am a quadcopter.";
         }
     }
 }
