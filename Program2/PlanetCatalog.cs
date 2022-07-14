@@ -8,9 +8,9 @@
 
         public PlanetCatalog()
         {
-            _planets.Add(new Planet("Венера", 38025, 2, _planets.LastOrDefault()));
-            _planets.Add(new Planet("Земля", 40076, 3, _planets.LastOrDefault()));
-            _planets.Add(new Planet("Марс", 21296, 4, _planets.LastOrDefault()));
+            _planets.Add(new Planet("Венера", 2, 38025, _planets.LastOrDefault()));
+            _planets.Add(new Planet("Земля", 3, 40076, _planets.LastOrDefault()));
+            _planets.Add(new Planet("Марс", 4, 21296, _planets.LastOrDefault()));
         }
 
         public (int OrdinalNumberFromTheSun, int EquatorLength, string Error) GetPlanet(string name)
