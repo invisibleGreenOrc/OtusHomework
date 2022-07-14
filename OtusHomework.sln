@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32505.426
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Program1", "OtusHomework\Program1.csproj", "{6E615382-9267-4766-A857-4A454389BDD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program2", "Program2\Program2.csproj", "{1A38BEA0-96B7-4F24-B990-7FC1963F640B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Program2", "Program2\Program2.csproj", "{1A38BEA0-96B7-4F24-B990-7FC1963F640B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3", "Program3\Program3.csproj", "{D6898167-35F7-476E-B7BF-213D461D23AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1A38BEA0-96B7-4F24-B990-7FC1963F640B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A38BEA0-96B7-4F24-B990-7FC1963F640B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A38BEA0-96B7-4F24-B990-7FC1963F640B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6898167-35F7-476E-B7BF-213D461D23AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6898167-35F7-476E-B7BF-213D461D23AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6898167-35F7-476E-B7BF-213D461D23AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6898167-35F7-476E-B7BF-213D461D23AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
