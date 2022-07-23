@@ -2,8 +2,9 @@
 {
     public class Employee : IComparable<Employee>
     {
-        private string _name;
-        private int _salary;
+        public string Name { get; set; }
+        public int Salary { get; private set; }
+
 
         public Employee(string name, int salary)
         {
@@ -12,13 +13,24 @@
                 throw new ArgumentNullException(nameof(name));
             }
 
-            _name = name;
-            _salary = salary;
+            Name = name;
+            Salary = salary;
         }
 
         public int CompareTo(Employee? other)
         {
-            throw new NotImplementedException();
+            if (other is null || Salary > other.Salary)
+            {
+                return 1;
+            }
+            else if (Salary < other.Salary)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

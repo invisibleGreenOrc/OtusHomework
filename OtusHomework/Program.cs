@@ -4,8 +4,6 @@
     {
         static void Main()
         {
-            var tempSalary = 0;
-
             var storage = new BinaryTreeStorage<Employee>();
 
             while (true)
@@ -23,7 +21,7 @@
                 {
                     Console.WriteLine("Введите заплату сотрудника (целое неотрицательное число):");
 
-                    if (int.TryParse(Console.ReadLine(), out tempSalary) && tempSalary > 0)
+                    if (int.TryParse(Console.ReadLine(), out int tempSalary) && tempSalary >= 0)
                     {
                         storage.Add(new Employee(tempName, tempSalary));
                         Console.WriteLine("Сотрудник добавлен");
@@ -35,6 +33,8 @@
                     }
                 }
             }
+
+            Console.ReadLine();
         }
     }
 }
