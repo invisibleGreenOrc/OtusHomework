@@ -17,6 +17,28 @@
             AddNode(nodeToAdd, _root);
         }
 
+        public List<T> GetAscSortedList()
+        {
+            if (_root is null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var sortedNodes = new List<Node<T>>();
+            GetAscSortedNodes(_root, sortedNodes);
+
+            return sortedNodes.Select(x => x.Data).ToList();
+        }
+
+        public T? Find(T person)
+        {
+            if (_root is null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return Find(person, _root);
+        }
 
         public T? Find(T data, Node<T> baseNode)
         {
@@ -60,7 +82,7 @@
             }
             else if (nodeToAdd.CompareTo(baseNode) < 0)
             {
-                if (baseNode.LeftNode == null)
+                if (baseNode.LeftNode is null)
                 {
                     baseNode.LeftNode = nodeToAdd;
                 }
@@ -71,7 +93,7 @@
             }
             else
             {
-                if (baseNode.RightNode == null)
+                if (baseNode.RightNode is null)
                 {
                     baseNode.RightNode = nodeToAdd;
                 }
@@ -79,6 +101,21 @@
                 {
                     AddNode(nodeToAdd, baseNode.RightNode);
                 }
+            }
+        }
+
+        private void GetAscSortedNodes(Node<T> baseNode, List<Node<T>> sortedNodes)
+        {
+            if (baseNode.LeftNode is not null)
+            {
+                GetAscSortedNodes(baseNode.LeftNode, sortedNodes);
+            }
+
+            sortedNodes.Add(baseNode);
+
+            if (baseNode.RightNode is not null)
+            {
+                GetAscSortedNodes(baseNode.RightNode, sortedNodes);
             }
         }
     }
