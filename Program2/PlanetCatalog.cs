@@ -3,11 +3,14 @@
     public class PlanetCatalog
     {
         private List<Planet> _planets = new();
-        private int _allowedNumberOfRequests = 2;
-        private int _currentNumberOfRequests = 0;
+        private int _allowedNumberOfRequests;
+        private int _currentNumberOfRequests;
 
         public PlanetCatalog()
         {
+            _allowedNumberOfRequests = 2;
+            _currentNumberOfRequests = 0;
+
             _planets.Add(new Planet("Венера", 2, 38025, _planets.LastOrDefault()));
             _planets.Add(new Planet("Земля", 3, 40076, _planets.LastOrDefault()));
             _planets.Add(new Planet("Марс", 4, 21296, _planets.LastOrDefault()));
