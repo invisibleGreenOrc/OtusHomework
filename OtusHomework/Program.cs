@@ -54,7 +54,7 @@ namespace OtusHomework
 
         public static int GetFibonacciNumberRecursion(int position)
         {
-            if (position == 0 || position == 1)
+            if (position < 2)
             {
                 return position;
             }
@@ -64,7 +64,7 @@ namespace OtusHomework
 
         public static int GetFibonacciNumberLoop(int position)
         {
-            if (position == 0 || position == 1)
+            if (position < 2)
             {
                 return position;
             }
