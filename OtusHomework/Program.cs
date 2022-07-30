@@ -67,10 +67,5 @@ namespace OtusHomework
 
             Console.WriteLine(sb.ToString());
         }
-
-        public static bool IsPlanetsEqual()
-        {
-            return true;
-        }
     }
 }
