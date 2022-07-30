@@ -8,12 +8,7 @@
 
         public Node(T data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-
-            Data = data;
+            Data = data ?? throw new ArgumentNullException(nameof(data));
         }
 
         public int CompareTo(Node<T>? other)
