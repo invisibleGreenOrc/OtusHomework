@@ -18,7 +18,7 @@ namespace OtusHomework
             _fileName = "bigimage.jpg";
         }
 
-        public void Download()
+        public async Task DownloadAsync()
         {
             var myWebClient = new WebClient();
 
@@ -28,7 +28,7 @@ namespace OtusHomework
             }
 
             Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", _fileName, _remoteUri);
-            myWebClient.DownloadFile(_remoteUri, _fileName);
+            await myWebClient.DownloadFileTaskAsync(_remoteUri, _fileName);
             Console.WriteLine("Успешно скачал \"{0}\" из \"{1}\"", _fileName, _remoteUri);
 
             if (DownloadCompleted is not null)
