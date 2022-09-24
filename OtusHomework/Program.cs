@@ -17,9 +17,9 @@
             {
                 ShowMenu();
 
-                var key = Console.ReadKey(true);
+                var keyInfo = Console.ReadKey(true);
 
-                switch (key.Key)
+                switch (keyInfo.Key)
                 {
                     case _keyToAddProduct:
                         shop.Add(GetProductName());
