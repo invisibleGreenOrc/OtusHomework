@@ -6,12 +6,12 @@
 
         static void Main()
         {
-            var downloader = new ImageLoader();
+            var loader = new ImageLoader();
 
-            downloader.DownloadStarted += () => Console.WriteLine("Скачивание файла началось");
-            downloader.DownloadCompleted += () => Console.WriteLine("Скачивание файла закончилось");
+            loader.DownloadStarted += () => Console.WriteLine("Скачивание файла началось");
+            loader.DownloadCompleted += () => Console.WriteLine("Скачивание файла закончилось");
 
-            var downloadTask = downloader.DownloadAsync();
+            var downloadTask = loader.DownloadAsync();
 
             while (true)
             {
