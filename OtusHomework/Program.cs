@@ -17,24 +17,16 @@ namespace OtusHomework
 
             CreateFiles(directories, baseFileName, numberOfFilesPerDirectory);
 
-            try
+            var allFiles = Directory.EnumerateFiles(baseDirectoryPath, "*.*", SearchOption.AllDirectories);
+
+            foreach (var file in allFiles)
             {
-                var allFiles = Directory.EnumerateFiles(baseDirectoryPath, "*.*", SearchOption.AllDirectories);
-
-                foreach (var file in allFiles)
-                {
-                    WriteDataToFile(file, Path.GetFileName(file));
-                    WriteDataToFile(file, " " + DateTime.Now);
-                }
-
-                foreach (var file in allFiles)
-                {
-                    PrintDataFromFile(file);
-                }
+                WriteDataToFile(file, Path.GetFileName(file));
+                WriteDataToFile(file, " " + DateTime.Now);
             }
-            catch (Exception e)
+            foreach (var file in allFiles)
             {
-                Console.WriteLine($"The process failed: {e.Message}");
+                PrintDataFromFile(file);
             }
 
             Console.ReadKey();
@@ -47,7 +39,7 @@ namespace OtusHomework
             for (int i = 1; i <= quantity; i++)
             {
                 var path = Path.Combine(sourceDirPath, $"{baseName}{i}");
-                new DirectoryInfo(path).Create();
+                Directory.CreateDirectory(path);
                 directoriesPaths.Add(path);
             }
 
@@ -67,12 +59,26 @@ namespace OtusHomework
 
         private static void WriteDataToFile(string filePath, string data)
         {
-            File.AppendAllText(filePath, data, Encoding.UTF8);
+            try
+            {
+                File.AppendAllText(filePath, data, Encoding.UTF8);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Не удалось записать данные в один из файлов. Ошибка: {e.Message}");
+            }
         }
 
         private static void PrintDataFromFile(string filePath)
         {
-            Console.WriteLine($"{Path.GetFileName(filePath)}: {File.ReadAllText(filePath)}");
+            try
+            {
+                Console.WriteLine($"{Path.GetFileName(filePath)}: {File.ReadAllText(filePath)}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Не удалось прочитать один из файлов. Ошибка: {e.Message}");
+            }
         }
     }
 }
