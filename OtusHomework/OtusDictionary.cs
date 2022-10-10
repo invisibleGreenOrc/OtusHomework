@@ -5,16 +5,10 @@
         private Item[] _storage;
         private int _storageLength;
 
-        public string this[int i]
+        public string this[int key]
         {
-            get
-            {
-                return Get(i);
-            }
-            set
-            {
-                Add(i, value);
-            }
+            get => Get(key);
+            set => Add(key, value);
         }
 
         public OtusDictionary()
